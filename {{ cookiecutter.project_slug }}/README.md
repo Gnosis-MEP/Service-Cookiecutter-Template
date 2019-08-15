@@ -34,7 +34,7 @@ $ pip install -e .
 # Running
 Inside the python environment (virtualenv or conda environment), run:
 ```
-$ ./{{ cookiecutter.package_name }}/.run.py
+$ ./{{ cookiecutter.package_name }}/run.py
 ```
 
 # Testing
