@@ -3,7 +3,7 @@ Use this to create new services
 
 
 ## Installing Cookiecutter
-`pip install --user cookiecutter`, ref: [cookiecutter installation page](https://cookiecutter.readthedocs.io/en/latest/installation.html)
+`$ pip install --user cookiecutter`, ref: [cookiecutter installation page](https://cookiecutter.readthedocs.io/en/latest/installation.html)
 
 ## Using this template
 
