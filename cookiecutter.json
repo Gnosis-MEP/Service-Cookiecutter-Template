@@ -1,0 +1,12 @@
+{
+    "project_name": "Some Service",
+    "description": "some service",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+    "package_name": "{{ cookiecutter.project_name|lower|replace('-', '_')|replace(' ', '_') }}",
+    "service_class_name": "{{ cookiecutter.project_name|title|replace(' ', '') }}",
+    "service_stream_key": "??-data",
+    "service_cmd_key": "??-cmd",
+    "author": "Felipe Arruda Pontes",
+    "author_email": "felipe.arruda.pontes@insight-centre.org",
+    "gitlab_repository_path": "sit/mps/{{ cookiecutter.project_slug }}"
+}
