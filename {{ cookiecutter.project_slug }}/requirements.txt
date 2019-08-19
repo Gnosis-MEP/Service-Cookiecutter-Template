@@ -1,3 +1,4 @@
 event-service-utils
 python-decouple==3.1
 walrus==0.7.1
+-e file:./#egg={{ cookiecutter.package_name }}

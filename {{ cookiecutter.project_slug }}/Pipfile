@@ -17,6 +17,7 @@ flake8 = "*"
 walrus = "==0.7.1"
 python-decouple = "==3.1"
 event-service-utils = "*"
+{{ cookiecutter.package_name }} = {path = ".",editable = true}
 
 [requires]
 python_version = "3.6"

@@ -26,13 +26,6 @@ To install from the `requirements.txt` file, run the following command:
 $ pip install --extra-index-url https://${SIT_PYPI_USER}:${SIT_PYPI_PASS}@sit-pypi.herokuapp.com/simple -r requirements.txt
 ```
 
-## Install project as a local package
-In order to be able to access the `{{ cookiecutter.package_name }}` python package from withing the python modules, one need to have it in the PYTHON_PATH.
-The easiest way to do that is to install the project in editable mode, to do that run the following command inside the project root directory:
-```
-$ pip install -e .
-```
-
 # Running
 Inside the python environment (virtualenv or conda environment), run:
 ```
@@ -49,7 +42,7 @@ Also, there's a python script at `./{{ cookiecutter.package_name }}/send_msgs_te
 ## Build
 Build the docker image using: `docker-compose build`
 
-**ps**: It's required to have the .env variables loaded into the shell so that the container can build properly. An easy way of doing this is using `pipenv shell` to start the python environment with the `.env` file loaded.
+**ps**: It's required to have the .env variables loaded into the shell so that the container can build properly. An easy way of doing this is using `pipenv shell` to start the python environment with the `.env` file loaded or using the `source load_env.sh` command inside your preferable python environment (eg: conda).
 
 ## Run
 Use `docker-compose run --rm service` to run the docker image
