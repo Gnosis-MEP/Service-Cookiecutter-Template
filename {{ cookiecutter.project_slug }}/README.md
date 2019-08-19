@@ -19,9 +19,11 @@ This runs the installation using **pip** under the hood, but also handle the cro
 ### Using pip
 To install using pip directly, one needs to use the `--extra-index-url` when running the `pip install` command, in order for to be able to use our private Pypi repository.
 
-To install from the `requirements.txt` file, run the following command, but replacing the `{SIT_PYPI_USER}` and `{SIT_PYPI_PASS}` with the correct values:
+Load the environment variables from `.env` file using `source load_env.sh`.
+
+To install from the `requirements.txt` file, run the following command:
 ```
-$ pip install -r --extra-index-url https://{SIT_PYPI_USER}:{SIT_PYPI_PASS}@sit-pypi.herokuapp.com/simple
+$ pip install --extra-index-url https://${SIT_PYPI_USER}:${SIT_PYPI_PASS}@sit-pypi.herokuapp.com/simple -r requirements.txt
 ```
 
 ## Install project as a local package
