@@ -32,7 +32,7 @@ ENV SIT_PYPI_PASS $SIT_PYPI_PASS_VAR
 
 ADD . /service
 WORKDIR /service
-RUN rm Pipfile.lock && pipenv lock -vvv && pipenv --rm && \
+RUN rm -f Pipfile.lock && pipenv lock -vvv && pipenv --rm && \
     pipenv install --system && \
     pip install -e . && \
     rm -rf /tmp/pip* /root/.cache
