@@ -23,7 +23,7 @@ def new_action_msg(action, event_data):
     return schema.json_msg_load_from_dict()
 
 
-def send_msgs(service_stream):
+def send_action_msgs(service_cmd):
     msg_1 = new_action_msg(
         'someAction',
         {
@@ -39,17 +39,31 @@ def send_msgs(service_stream):
         }
     )
 
-    import ipdb; ipdb.set_trace()
     print(f'Sending msg {msg_1}')
     service_stream.write_events(msg_1)
     print(f'Sending msg {msg_2}')
     service_stream.write_events(msg_2)
 
 
+def send_data_msg(service_stream):
+    data_msg = {
+        'event': json.dumps(
+            {
+                'some': 'data'
+            }
+        )
+    }
+    print(f'Sending msg {data_msg}')
+    service_stream.write_events(data_msg)
+
+
 def main():
     stream_factory = RedisStreamFactory(host=REDIS_ADDRESS, port=REDIS_PORT)
+    service_cmd = stream_factory.create(SERVICE_CMD_KEY, stype='streamOnly')
     service_stream = stream_factory.create(SERVICE_STREAM_KEY, stype='streamOnly')
-    send_msgs(service_stream)
+    import ipdb; ipdb.set_trace()
+    send_action_msgs(service_cmd)
+    send_data_msg(service_stream)
 
 
 if __name__ == '__main__':
