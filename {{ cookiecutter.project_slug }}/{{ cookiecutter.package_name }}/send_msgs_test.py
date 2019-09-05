@@ -41,9 +41,9 @@ def send_action_msgs(service_cmd):
     )
 
     print(f'Sending msg {msg_1}')
-    service_stream.write_events(msg_1)
+    service_cmd.write_events(msg_1)
     print(f'Sending msg {msg_2}')
-    service_stream.write_events(msg_2)
+    service_cmd.write_events(msg_2)
 
 
 def send_data_msg(service_stream):
