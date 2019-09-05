@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import json
 from event_service_utils.streams.redis import RedisStreamFactory
 from event_service_utils.schemas.internal_msgs import (
     BaseInternalMessage,
