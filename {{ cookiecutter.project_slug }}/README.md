@@ -27,7 +27,13 @@ $ pip install --extra-index-url https://${SIT_PYPI_USER}:${SIT_PYPI_PASS}@sit-py
 ```
 
 # Running
-Inside the python environment (virtualenv or conda environment), run:
+Enter project python environment (virtualenv or conda environment).
+
+Then load the environment variables from `.env` file using `source load_env.sh`.
+
+**ps:** With **pipenv** you won't need to load the `.env` file, since it does this automatically for you.
+
+Then, run the service with:
 ```
 $ ./{{ cookiecutter.package_name }}/run.py
 ```
