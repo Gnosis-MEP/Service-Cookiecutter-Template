@@ -1,6 +1,18 @@
 # {{ cookiecutter.project_name }}
 {{ cookiecutter.description }}
 
+# Commands Stream
+## Inputs
+...
+
+## Outputs
+...
+# Data Stream
+## inputs
+...
+
+## Outputs
+...
 
 # Installation
 
