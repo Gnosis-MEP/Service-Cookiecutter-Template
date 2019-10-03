@@ -16,9 +16,10 @@ In the end it will create a directory with the new project slug in the current d
 
 # Whats inside
 
-* Fully running service (service.py)
+* Fully running service  skeleton
 * Service configurations read from .env file
 * Reading and processing `data` and `command` streams
 * Simple python script for manualy sending test messages
 * Unit tests setup and working test example
+* Event tracing enabled (using Jaeger as distributed event tracing)
 * Documentation

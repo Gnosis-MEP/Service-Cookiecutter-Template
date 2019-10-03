@@ -6,7 +6,7 @@ services:
       - "6379:6379"
 
   service:
-    image: registry.insight-centre.org/{{ cookiecutter.gitlab_repository_path }}:latest
+    image: registry.insight-centre.org/{{ cookiecutter.gitlab_repository_path }}:dev
     command: echo "ok"
     build:
       context: '.'

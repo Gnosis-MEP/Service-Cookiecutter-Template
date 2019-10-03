@@ -30,11 +30,18 @@ ARG SIT_PYPI_PASS_VAR
 ENV SIT_PYPI_USER $SIT_PYPI_USER_VAR
 ENV SIT_PYPI_PASS $SIT_PYPI_PASS_VAR
 
-ADD . /service
+## install only the service requirements
+ADD ./Pipfile /service/Pipfile
+ADD ./setup.py /service/setup.py
+RUN mkdir -p /service/{{ cookiecutter.package_name }}/ && \
+    touch /service/{{ cookiecutter.package_name }}/__init__.py
 WORKDIR /service
 RUN rm -f Pipfile.lock && pipenv lock -vvv && pipenv --rm && \
-    pipenv install --system && \
-    pip install -e . && \
+    pipenv install --system  && \
     rm -rf /tmp/pip* /root/.cache
 
-
+## add all the rest of the code and install the actual package
+## this should keep the cached layer above if no change to the pipfile or setup.py was done.
+ADD . /service
+RUN pip install -e . && \
+    rm -rf /tmp/pip* /root/.cache

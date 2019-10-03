@@ -1,6 +1,12 @@
 stages:
   - build
   - test
+  - benchmark
+
+variables:
+  - SERVICE_STREAM_KEY: {{ cookiecutter.service_stream_key }}
+  - SERVICE_CMD_KEY: {{ cookiecutter.service_cmd_key }}
+  - LOGGING_LEVEL: DEBUG
 
 
 Build Image:
@@ -10,15 +16,21 @@ Build Image:
   script:
     - rm -r /root/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --skip-tls-verify --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:latest --build-arg SIT_PYPI_USER_VAR=$SIT_PYPI_USER --build-arg SIT_PYPI_PASS_VAR=$SIT_PYPI_PASS --cache=true
+    - /kaniko/executor --context $CI_PROJECT_DIR --skip-tls-verify --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:dev --build-arg SIT_PYPI_USER_VAR=$SIT_PYPI_USER --build-arg SIT_PYPI_PASS_VAR=$SIT_PYPI_PASS --cache=true
 
 
 test:
   stage: test
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE:dev
   script:
   - cd $CI_PROJECT_DIR
   - pip install -e .
   - python --version
   - pipenv --version
   - ./run_tests.sh
+
+Sent to benchmark:
+  stage: benchmark
+  script:
+    - wget -T 10 -O- --post-data='{"override_services": {"{{ cookiecutter.project_slug }}": {"image": "$CI_REGISTRY_IMAGE:dev"} }}' --header='Content-Type:application/json' '${BENCHMARK_PLATFORM_CONTROLLER_API}'
+  when: manual

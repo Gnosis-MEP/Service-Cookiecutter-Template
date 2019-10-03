@@ -68,11 +68,13 @@ Use `docker-compose run --rm service` to run the docker image
 
 This is automatically enabled for this project (using the `.gitlab-ci.yml` present in this project root folder).
 
-By default it will build the Dockerfile with every commit sent to the origin repository.
+By default it will build the Dockerfile with every commit sent to the origin repository and tag it as 'dev'.
 
 Afterwards, it will use this newly builty image to run the tests using the `./run_tests.sh` script.
 
 But in order to make the automatic docker image build work, you'll need to set the `SIT_PYPI_USER` and `SIT_PYPI_PASS` variables in the Gitlab CI setting page: [{{ cookiecutter.project_name }} CI Setting Page](https://gitlab.insight-centre.org/{{ cookiecutter.gitlab_repository_path }}/settings/ci_cd).
 
-And, in order to make the automatic tests work, you should also set the rest of the environement variables required by your service, usually the same you have set in your `.env` and which allows your `./run_tests.sh` to work.
+And, in order to make the automatic tests work, you should also set the rest of the environement variables required by your service, in the this projects `.gitlab-ci.yml` file, in the `variables` section. But don't add sensitive information to this file, such as passwords, this should be set through the Gitlab CI settings page, just like the `SIT_PYPI_USER`.
 
+## Benchmark Tests
+To run the benchmark tests one needs to manually start the Benchmark stage in the CI pipeline, it shoud be enabled after the tests stage is done. Only by passing the benchmark tests shoud the image be tagged with 'latest', to show that it is a stable docker image.
