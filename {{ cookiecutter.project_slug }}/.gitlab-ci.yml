@@ -4,9 +4,9 @@ stages:
   - benchmark
 
 variables:
-  - SERVICE_STREAM_KEY: {{ cookiecutter.service_stream_key }}
-  - SERVICE_CMD_KEY: {{ cookiecutter.service_cmd_key }}
-  - LOGGING_LEVEL: DEBUG
+  SERVICE_STREAM_KEY: {{ cookiecutter.service_stream_key }}
+  SERVICE_CMD_KEY: {{ cookiecutter.service_cmd_key }}
+  LOGGING_LEVEL: DEBUG
 
 
 Build Image:
@@ -32,5 +32,5 @@ test:
 Sent to benchmark:
   stage: benchmark
   script:
-    - wget -T 10 -O- --post-data='{"override_services": {"{{ cookiecutter.project_slug }}": {"image": "$CI_REGISTRY_IMAGE:dev"} }}' --header='Content-Type:application/json' '${BENCHMARK_PLATFORM_CONTROLLER_API}'
+    - echo 'ok'
   when: manual
