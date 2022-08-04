@@ -18,8 +18,9 @@ In the end it will create a directory with the new project slug in the current d
 
 * Fully running service  skeleton
 * Service configurations read from .env file
-* Reading and processing `data` and `command` streams
+* Reading and processing `data` and `command` streams (event-sourcing paradigm for the latter)
 * Simple python script for manualy sending test messages
 * Unit tests setup and working test example
 * Event tracing enabled (using Jaeger as distributed event tracing)
+* Service Annoucement (optional)
 * Documentation

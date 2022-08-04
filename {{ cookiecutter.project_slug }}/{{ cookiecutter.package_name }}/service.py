@@ -1,13 +1,14 @@
 import threading
 
 from event_service_utils.logging.decorators import timer_logger
-from event_service_utils.services.tracer import BaseTracerService
+from event_service_utils.services.event_driven import BaseEventDrivenCMDService
 from event_service_utils.tracing.jaeger import init_tracer
 
 
-class {{ cookiecutter.service_class_name }}(BaseTracerService):
+class {{ cookiecutter.service_class_name }}(BaseEventDrivenCMDService):
     def __init__(self,
-                 service_stream_key, service_cmd_key,
+                 service_stream_key, service_cmd_key_list,
+                 pub_event_list, service_details,
                  stream_factory,
                  logging_level,
                  tracer_configs):
@@ -15,12 +16,14 @@ class {{ cookiecutter.service_class_name }}(BaseTracerService):
         super({{ cookiecutter.service_class_name }}, self).__init__(
             name=self.__class__.__name__,
             service_stream_key=service_stream_key,
-            service_cmd_key=service_cmd_key,
+            service_cmd_key_list=service_cmd_key_list,
+            pub_event_list=pub_event_list,
+            service_details=service_details,
             stream_factory=stream_factory,
             logging_level=logging_level,
             tracer=tracer,
         )
-        self.cmd_validation_fields = ['id', 'action']
+        self.cmd_validation_fields = ['id']
         self.data_validation_fields = ['id']
 
     # def send_event_to_somewhere(self, event_data):
@@ -34,22 +37,25 @@ class {{ cookiecutter.service_class_name }}(BaseTracerService):
         # do something here
         pass
 
-    def process_action(self, action, event_data, json_msg):
-        if not super({{ cookiecutter.service_class_name }}, self).process_action(action, event_data, json_msg):
+    def process_event_type(self, event_type, event_data, json_msg):
+        if not super({{ cookiecutter.service_class_name }}, self).process_event_type(event_type, event_data, json_msg):
             return False
-        if action == 'someAction':
-            # do some action
+        if event_type == 'SomeEventType':
+            # do some processing
             pass
-        elif action == 'otherAction':
-            # do some other action
+        elif event_type == 'OtherEventType':
+            # do some other processing
             pass
 
     def log_state(self):
         super({{ cookiecutter.service_class_name }}, self).log_state()
-        self.logger.info(f'My service name is: {self.name}')
+        self.logger.info(f'Service name: {self.name}')
+        # function for simple logging of python dictionary  
+        # self._log_dict('Some Dictionary', self.some_dict)
 
     def run(self):
         super({{ cookiecutter.service_class_name }}, self).run()
+        self.log_state()
         self.cmd_thread = threading.Thread(target=self.run_forever, args=(self.process_cmd,))
         self.data_thread = threading.Thread(target=self.run_forever, args=(self.process_data,))
         self.cmd_thread.start()

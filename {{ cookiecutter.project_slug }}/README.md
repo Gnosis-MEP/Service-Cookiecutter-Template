@@ -7,6 +7,7 @@
 
 ## Outputs
 ...
+
 # Data Stream
 ## inputs
 ...
@@ -55,7 +56,7 @@ Also, there's a python script at `./{{ cookiecutter.package_name }}/send_msgs_te
 
 
 # Docker
-## Build
+## Manual Build (not recommended)
 Build the docker image using: `docker-compose build`
 
 **ps**: It's required to have the .env variables loaded into the shell so that the container can build properly. An easy way of doing this is using `pipenv shell` to start the python environment with the `.env` file loaded or using the `source load_env.sh` command inside your preferable python environment (eg: conda).
@@ -72,7 +73,7 @@ By default it will build the Dockerfile with every commit sent to the origin rep
 
 Afterwards, it will use this newly builty image to run the tests using the `./run_tests.sh` script.
 
-But in order to make the automatic docker image build work, you'll need to set the `SIT_PYPI_USER` and `SIT_PYPI_PASS` variables in the Gitlab CI setting page: [{{ cookiecutter.project_name }} CI Setting Page](https://gitlab.insight-centre.org/{{ cookiecutter.gitlab_repository_path }}/settings/ci_cd).
+But in order to make the automatic docker image build work, you'll need to set the `SIT_PYPI_USER` and `SIT_PYPI_PASS` variables in the Gitlab CI setting page: [{{ cookiecutter.project_name }} CI Setting Page](https://gitlab.insight-centre.org/{{ cookiecutter.gitlab_repository_path }}/settings/ci_cd). (Or make sure the project is set under a Gitlab group that has this setup for all projects in that group).
 
 And, in order to make the automatic tests work, you should also set the rest of the environement variables required by your service, in the this projects `.gitlab-ci.yml` file, in the `variables` section. But don't add sensitive information to this file, such as passwords, this should be set through the Gitlab CI settings page, just like the `SIT_PYPI_USER`.
 
