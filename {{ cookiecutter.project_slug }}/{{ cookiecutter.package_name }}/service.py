@@ -26,9 +26,8 @@ class {{ cookiecutter.service_class_name }}(BaseEventDrivenCMDService):
         self.cmd_validation_fields = ['id']
         self.data_validation_fields = ['id']
 
-    # def send_event_to_somewhere(self, event_data):
-    #     self.logger.debug(f'Sending event to somewhere: {event_data}')
-    #     self.write_event_with_trace(event_data, self.somewhere_stream)
+    # def publish_some_event_type(self, event_data):
+    #     self.publish_event_type_to_stream(event_type=PUB_EVENT_TYPE_SOME_EVENT_TYPE, new_event_data=event_data)
 
     @timer_logger
     def process_data_event(self, event_data, json_msg):
@@ -50,7 +49,7 @@ class {{ cookiecutter.service_class_name }}(BaseEventDrivenCMDService):
     def log_state(self):
         super({{ cookiecutter.service_class_name }}, self).log_state()
         self.logger.info(f'Service name: {self.name}')
-        # function for simple logging of python dictionary  
+        # function for simple logging of python dictionary
         # self._log_dict('Some Dictionary', self.some_dict)
 
     def run(self):
