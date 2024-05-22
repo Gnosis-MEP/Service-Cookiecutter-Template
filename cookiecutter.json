@@ -7,5 +7,6 @@
     "service_stream_key": "??-data",
     "author": "Felipe Arruda Pontes",
     "author_email": "felipe.arruda.pontes@insight-centre.org",
+    "gitlab_registry": "registry.insight-centre.org",
     "gitlab_repository_path": "sit/mps/{{ cookiecutter.project_slug }}"
 }

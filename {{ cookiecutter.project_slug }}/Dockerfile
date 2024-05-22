@@ -1,4 +1,4 @@
-FROM registry.insight-centre.org/sit/mps/docker-images/base-services:latest
+FROM arruda/base-services:latest
 
 ## install only the service requirements
 ADD ./Pipfile /service/Pipfile
