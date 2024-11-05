@@ -7,7 +7,7 @@ Use this to create new services
 
 ## Using this template
 
-Run `$ cookiecutter https://gitlab.insight-centre.org/SIT/mps/service-cookiecutter-template`
+Run `$ cookiecutter https://github.com/Gnosis-MEP/Service-Cookiecutter-Template`
 
 
 Then answer the questions related to the new service that's is being created.
